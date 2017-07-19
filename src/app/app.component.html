@@ -1,3 +1,54 @@
-<h1>
-  {{title}}
-</h1>
+<app-navbar></app-navbar>
+
+<div class="container">
+    <h1>
+    {{title}}
+  </h1>
+
+  <div class="row" style="margin-top: 15px;">
+    <div class="col-1"></div>
+    <div class="col-6">
+      
+      <div class="card ">
+        <h3 class="card-header text-center card-primary">
+          
+          <i class="fa fa-lock fa-3x text-white"></i>
+
+        </h3>
+        <div class="card-block ">
+          <h4 class="card-title ">Enter Email assigned by Admin</h4>
+          <form action="">
+            <div class="row">
+              <div class="col-12 form-group">
+                <label for="">Email User Id</label>
+                <input class="form-control" type="text" id="txtEmail" name="txtEmail" placeholder="Enter Email User Id">
+              </div>
+              
+              <div class="col-12 form-group">
+                <label for="">Password</label>
+                <input class="form-control" type="password" id="txtPassword" name="txtPasswrd" placeholder="Enter password">
+              </div>
+
+              <div class="col-12 form-group">
+                <button class="btn btn-outline-primary pull-right">
+                  Login
+                </button>
+              </div>
+
+
+            </div>
+          </form>
+          
+          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+          
+        </div>
+      </div>
+
+      
+
+    </div>
+    <div class="col-2"></div>
+  </div>
+  
+  
+</div>
