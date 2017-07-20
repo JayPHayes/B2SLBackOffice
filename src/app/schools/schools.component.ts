@@ -3,6 +3,7 @@ import { FirebaseService } from './../services/firebase.service';
 import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { Router } from '@angular/router'
 
 
 
@@ -12,6 +13,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
   styleUrls: ['./schools.component.css']
 })
 export class SchoolsComponent implements OnInit {
+  
   isDisplay: boolean = false;
   selectedKey: any;
   selectedSchool: any;
@@ -30,7 +32,7 @@ export class SchoolsComponent implements OnInit {
 
 
   schoolList: any;
-  constructor(private firebaseSvc:FirebaseService) { }
+  constructor(private firebaseSvc:FirebaseService, private router: Router) { }
 
   ngOnInit() {
     this.firebaseSvc.getSchools().subscribe(school => {
@@ -82,6 +84,7 @@ export class SchoolsComponent implements OnInit {
     } else {
       this.firebaseSvc.addSchool(updSchool)
     }
+    this.isDisplay = !this.isDisplay
     
   }
   setImage(newImage){
@@ -96,6 +99,8 @@ export class SchoolsComponent implements OnInit {
       this.selSchoolName = school.name
       this.selSchoolAddress = school.address
       this.selSchoolImage = school.image
+      this.selSchoolWeb  = school.webSite
+      this.selSchoolPhone = school.phone
       console.log("this.selectedSchool: ", this.selectedSchool)
     });
   }
