@@ -1,3 +1,4 @@
+import { environment } from './../../environments/environment';
 import { Injectable } from '@angular/core';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
@@ -9,22 +10,24 @@ export class FirebaseService {
   school: FirebaseObjectObservable<School>
   schoolList: FirebaseListObservable<any[]>
 
-  FB_NODE = {
-    name:  "/schools",
-    FB_ITEM_SCHOOL: {
-      ITEM_KEY: "key",
-      ITEM_NAME: "name",
-      ITEM_Address: "address",
-      ITEM_note01: "notes01",
-      ITEM_Image: "image"
-    }
-  }
+
+  // Moved to Environemnt class
+  // FB_NODE = {
+  //   name:  "/schools",
+  //   FB_ITEM_SCHOOL: {
+  //     ITEM_KEY: "key",
+  //     ITEM_NAME: "name",
+  //     ITEM_Address: "address",
+  //     ITEM_note01: "notes01",
+  //     ITEM_Image: "image"
+  //   }
+  // }
   
   constructor(private db: AngularFireDatabase) { 
     // this.schoolList = this.db.list(this.FB_NODE.name) as FirebaseListObservable<School[]>;  
-    this.schoolList = this.db.list(this.FB_NODE.name, {
+    this.schoolList = this.db.list(environment.FB_NODE_SCHOOL.name, {
       query: {
-        orderByChild: this.FB_NODE.FB_ITEM_SCHOOL.ITEM_NAME
+        orderByChild: environment.FB_NODE_SCHOOL.FB_ITEM_SCHOOL.ITEM_NAME
       }
     }) as FirebaseListObservable<School[]>;  
   }
@@ -49,7 +52,7 @@ export class FirebaseService {
   }
 
   getSchoolDetails(key){
-    this.school = this.db.object(this.FB_NODE.name + '/' + key) as FirebaseObjectObservable<School>
+    this.school = this.db.object(environment.FB_NODE_SCHOOL.name + '/' + key) as FirebaseObjectObservable<School>
 
     return this.school
   }
@@ -68,5 +71,6 @@ interface School {
   logo?: string;
   note01?: string;
   note02?: string;
+  classRmCount: number;
       
 }

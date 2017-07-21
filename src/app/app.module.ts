@@ -1,3 +1,4 @@
+import { FirebaseClassRoomService } from './services/firebase-class-room.service';
 import { environment } from './../environments/environment';
 import { SchoolsComponent } from './schools/schools.component';
 import { HomeComponent } from './home/home.component';
@@ -56,7 +57,7 @@ const appRoutes: Routes = [
 
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [FirebaseService],
+  providers: [FirebaseService, FirebaseClassRoomService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -12,5 +12,28 @@ export const environment = {
     projectId: "b2sl-fec70",
     storageBucket: "b2sl-fec70.appspot.com",
     messagingSenderId: "230369581224"
+  },
+
+  FB_NODE_SCHOOL: {
+    name:  "/schools",
+    FB_ITEM_SCHOOL: {
+      ITEM_KEY: "key",
+      ITEM_NAME: "name",
+      ITEM_Address: "address",
+      ITEM_note01: "notes01",
+      ITEM_Image: "image"
+    }
+  },
+
+  FB_NODE_CLASSROOM: {
+    name:  "/classrooms",
+    FB_ITEM_CLASSRM: {
+      ITEM_KEY: "key",
+      ITEM_SCHOOL_KEY: "schoolkey",
+      ITEM_NAME: "name",
+      ITEM_Namelong: "namelong",
+      ITEM_NameShort: "nameshort",
+      ITEM_Notes01: "notes"
+    }
   }
 };
