@@ -22,6 +22,8 @@ import { ClassItemsComponent } from './class-items/class-items.component';
 import { MasterItemsComponent } from './master-items/master-items.component';
 import { LoginComponent } from './login/login.component';
 import { InvalidPageComponent } from './invalid-page/invalid-page.component';
+import { PipesfilterPipe } from './pipesfilter.pipe';
+import { FilterPipe } from './pipes/filter.pipe';
 
 const appRoutes: Routes = [
   {path: '', component:HomeComponent},
@@ -45,7 +47,9 @@ const appRoutes: Routes = [
     ClassItemsComponent,
     MasterItemsComponent,
     LoginComponent,
-    InvalidPageComponent
+    InvalidPageComponent,
+    PipesfilterPipe,
+    FilterPipe
   ],
   imports: [
     BrowserModule,

@@ -1,24 +1,33 @@
 
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><a [routerLink]="['/']">Home</a></li>
+  <li class="breadcrumb-item active"> Master Item list </li>
+</ol>
+
+
 <div class="row">
 
-  <div class="col-md-7">
+  <div class="col-md-6">
+    <input type="text" [(ngModel)]="search" name="search" id="search" class="form-control" placeholder="Item Search">
+
+    <br>
     <div class="card card-outline-primary">
       <div class="card-block">
         <blockquote class="card-blockquote">
           
-          <table class="table table-sm table-bordered table-responsive">
+          <table class="table table-sm table-bordered table-hover">
               <thead>
                 <tr>
                   <th>Qty</th>
                   <th>#</th>
                   <th>Item Name</th>
-                  <th></th>
+                  
                   <th></th>
                   
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let i of itemList" [class.table-active]="i.$key == selectedKey">
+                <tr *ngFor="let i of itemList | filter:search" [class.table-active]="i.$key == selectedItem?.$key">
                   <th scope="row">
                     <button (click)="selectItem(i.$key)" class="btn btn-outline-primary btn-sm">
                         <i class="fa fa-arrow-right"></i> 
@@ -29,9 +38,9 @@
                   </th>
                   
                   <td>{{i.itemName}}</td>
-                  <td>{{i.itemType}} </td>
+                  
                   <td>
-                      <button (click)="delSchool(s.$key)" class="btn btn-danger btn-sm">
+                      <button (click)="delItem(i.$key)" class="btn btn-danger btn-sm">
                         <i class="fa fa-trash-o"></i> 
                       </button>
                     </td>
@@ -41,7 +50,11 @@
 
 
 
-          <footer>Someone famous in <cite title="Source Title">Source Title</cite></footer>
+            <footer class="text-muted text-sm-center" style="font-size: xx-small;">
+              Select Master Item Key:  <cite title="Source Title">{{selectedItem?.$key}}</cite>
+              <br>
+              Total Item Count: {{itemList?.length}}
+            </footer>
         </blockquote>
       </div>
     </div>
@@ -50,7 +63,7 @@
   </div>
 
 
-  <div class="col-md-5">
+  <div class="col-md-6">
     <div class="card card-outline-primary text-center" hidden>
       <h3 class="card-header">{{selItemName}}</h3>
       <div class="card-block">
@@ -141,22 +154,19 @@
     <div class="row">
       <div class="col-sm-12">
         <div class="btn-group pull-right" role="group" aria-label="Basic example">
-          <button (click)="addNewSchool()" type="button" class="btn btn-outline-success"> 
+          <button (click)="addNewItem()" type="button" class="btn btn-outline-success"> 
             <i class="fa fa-plus"></i>
-            <span>Add</span>
+            <span>Reset Screen Add New Item</span>
           </button>
-
-          <button (click)="editSchool()" type="button" class="btn btn-outline-info">
-            <i class="fa fa-edit"></i>
-            Edit
+          <button (click)="saveItem()" type="button" class="btn btn-outline-primary"> 
+            <i class="fa fa-save"></i>
+            <span>Save</span>
           </button>
-          <button type="button" class="btn btn-outline-danger">
-            <i class="fa fa-trash"></i>
-            Delete
-          </button>
-        </div>
+       </div>
       </div>
+      
     </div>
+    <br>
     <div class="card card-outline-primary text-center">
       <h3 class="card-header">{{selItemName}}</h3>
       <div class="card-block">
@@ -164,8 +174,6 @@
           <blockquote class="card-blockquote">
             <h5>{{selItemType}}</h5>
             <img class="img-fluid" src={{selItemImageUrl}} style="width:50%; height:225px;" alt="Card image cap">
-
-<!-- src="http://www.elmers.com/images/default-source/product-catalog-images/e520-jpg.tmb-thumb230.jpg?Status=Master&sfvrsn=7" -->
 
             <h5>{{selItemDesc}} - {{selItemQty}}</h5>
             <p class=" text-muted text-sm-left">{{selItemNotes}}</p>
@@ -238,59 +246,10 @@
             </table>
 
 
-            <div class="card card-outline-info" >
-              <div class="card-block">
-                <blockquote class="card-blockquote">
-                  
-                  <table class="table text-left table-responsive ">
-                    <tr>
-                     
-                      <td>
-                        <div class="form-check">
-                            <label class="form-check-label">
-                              <input [(ngModel)]="selItemType" class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="All Students" checked>
-                              <strong>All Students</strong>
-                            </label>
-                          </div>
-                      </td>
-                        <td>
-                        <div class="form-check">
-                            <label class="form-check-label">
-                              <input [(ngModel)]="selItemType" class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="Boys Only" checked="">
-                              <strong>Boys Only </strong>
-                            </label>
-                          </div>
-                      </td>
-                      <td>
-                        <div class="form-check">
-                            <label class="form-check-label">
-                              <input [(ngModel)]="selItemType" class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="Girls Only" checked="">
-                              <strong>Girls Only </strong>
-                            </label>
-                          </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      
-                      <td>
-                        <div class="form-check">
-                            <label class="form-check-label">
-                              <input [(ngModel)]="selItemType" class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="Class Room Items" checked="">
-                              <strong>Class Room Item</strong>
-                            </label>
-                          </div>
-                      </td>
-                    </tr>
 
-                  </table>
-
-
-                </blockquote>
-            </div>
-          </div>
           <br>
           <button type="submit" class="btn btn-outline-success btn-block btn-lg">Save</button>
-          <footer>Someone famous in <cite title="Source Title">Source Title</cite></footer>
+          <footer>Select Master Item Key:  <cite title="Source Title">{{selectedItem?.$key}}</cite></footer>
         </blockquote>
 
         </form>

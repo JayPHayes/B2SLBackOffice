@@ -23,8 +23,8 @@ export class FirebaseMastItemService {
     return this.itemList.push(newItem)
   }
 
-    updateItem(key, item){
-    console.log('item: ', item)
+  updateItem(key, item){
+    console.log('XXXX item: ', item)
 
     return this.itemList.update(key, item)
   }
@@ -47,11 +47,11 @@ export class FirebaseMastItemService {
 interface Item {
   $key?: string;
   itemName?: string;
-  desc?: string;
-  qty?: string;
+  itemDesc?: string;
+  itemQty?: string;
   itemImageUrl?: string;
-  notes?: string;
-  type?: string;
+  itemNotes?: string;
+  itemType?: string;
   itemRetail01?: string;
   itemRetail01Name?: string;
   itemRetail02?: string;

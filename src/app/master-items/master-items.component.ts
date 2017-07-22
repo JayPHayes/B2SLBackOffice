@@ -1,9 +1,11 @@
+
 import { FirebaseMastItemService } from './../services/firebase-mast-item.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Pipe } from '@angular/core';
 import { FirebaseService } from './../services/firebase.service';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { Router } from '@angular/router'
+import { FilterPipe } from './../pipes/filter.pipe';
 
 
 @Component({
@@ -14,11 +16,12 @@ import { Router } from '@angular/router'
 export class MasterItemsComponent implements OnInit {
   itemList: any;
 
+  
   selectedItem: any;
   selItemName1: string = ""
 
   selItemKey: string = "";
-  selItemName: string = "x";
+  selItemName: string = "";
   selItemDesc: string = "";
   selItemQty: string = "";
   selItemImageUrl: string = "";
@@ -47,6 +50,11 @@ export class MasterItemsComponent implements OnInit {
     });
   }
 
+
+  delItem(key){
+    this.firebasesvc.delItem(key);
+  }
+
   selectItem(key){
     
     console.log('key', key)
@@ -56,21 +64,22 @@ export class MasterItemsComponent implements OnInit {
 
       this.selItemKey = item.$key;
       this.selectedItem = item;
+
       this.selItemName = item.itemName;
       this.selItemImageUrl = item.itemImageUrl;  
 
-      this.selItemDesc = item.desc;
-      this.selItemQty = item.qty;
+      this.selItemDesc = item.itemDesc;
+      this.selItemQty = item.itemQty;
 
-      this.selItemNotes = item.notes;
-      this.selItemType = item.type;
+      this.selItemNotes = item.itemNotes;
+      this.selItemType = item.itemType;
 
       this.selItemRetail01 = item.itemRetail01;
-      this.selItemRetail02 = item.itemRetail01;
-      this.selItemRetail03 = item.itemRetail01;
+      this.selItemRetail02 = item.itemRetail02;
+      this.selItemRetail03 = item.itemRetail03;
 
-      this.selItemRetail02Name = item.itemRetail01Name;
-      this.selItemRetail01Name = item.itemRetail02Name;
+      this.selItemRetail01Name = item.itemRetail01Name;
+      this.selItemRetail02Name = item.itemRetail02Name;
       this.selItemRetail03Name = item.itemRetail03Name;
     });
     console.log('this.selItemName', this.selItemName);
@@ -80,7 +89,6 @@ export class MasterItemsComponent implements OnInit {
 
   saveItem(){
     let newUpdItem = {
-
       itemName: this.selItemName,
       itemDesc: this.selItemDesc,
       itemQty: this.selItemQty,
@@ -97,7 +105,7 @@ export class MasterItemsComponent implements OnInit {
       itemRetail03Name: this.selItemRetail03Name
     }
 
-    console.log("newUpdItem", newUpdItem)
+    console.log("selItemKey", this.selItemKey)
     if(this.selItemKey){
       this.firebasesvc.updateItem(this.selItemKey, newUpdItem);
     } else {
@@ -107,6 +115,7 @@ export class MasterItemsComponent implements OnInit {
 
   addNewItem(){
     this.selItemKey = "";
+    this.selectedItem = null; 
 
     this.selItemName = "";
     this.selItemDesc = "";
