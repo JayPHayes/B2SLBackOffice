@@ -7,6 +7,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MasterItemsComponent implements OnInit {
 
+  selItemName: string = "";
+  selItemDesc: string = "";
+  selItemQty: string = "";
+  selItemImageUrl: string = "";
+  selItemNotes: string = "";
+  selItemType: string = "All Students";   //Boy, Girl, All, Class Room
+  
+  selItemRetail01: string = "";
+  selItemRetail02: string = "";
+  selItemRetail03: string = "";
+  
+  selItemRetail02Name: string = "";
+  selItemRetail01Name: string = "";
+  selItemRetail03Name: string = "";
+  
+  
+
+
   constructor() { }
 
   ngOnInit() {

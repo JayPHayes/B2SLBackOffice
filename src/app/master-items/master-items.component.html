@@ -1,3 +1,320 @@
-<p>
-  master-items works!
-</p>
+
+<div class="row">
+
+  <div class="col-md-5">
+    <div class="card card-outline-primary">
+      <div class="card-block">
+        <blockquote class="card-blockquote">
+          
+          <table class="table table-sm table-bordered table-responsive">
+              <thead>
+                <tr>
+                  <th>Qty</th>
+                  <th>#</th>
+                  <th>Item Name</th>
+                  <th></th>
+                  <th></th>
+                  
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">
+                    <button (click)="selectSchool(s.$key)" class="btn btn-outline-primary btn-sm">
+                        <i class="fa fa-arrow-right"></i> 
+                      </button>
+                  </th>
+                  <th>
+                    1 box
+                  </th>
+                  
+                  <td>24 Ct Crayola crayons</td>
+                  <td>Girls </td>
+                  <td>
+                      <button (click)="delSchool(s.$key)" class="btn btn-danger btn-sm">
+                        <i class="fa fa-trash-o"></i> 
+                      </button>
+                    </td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <button (click)="selectSchool(s.$key)" class="btn btn-outline-primary btn-sm">
+                        <i class="fa fa-arrow-right"></i> 
+                      </button>
+                  </th>
+                    <th>
+                      3 Packs
+                    </th>
+                  <td>1" White Binders - With clear view front pockets</td>
+                  <td></td>
+                  <td>
+                      <button (click)="delSchool(s.$key)" class="btn btn-danger btn-sm">
+                        <i class="fa fa-trash-o"></i> 
+                      </button>
+                    </td>
+                </tr>
+              </tbody>
+          </table>
+
+
+
+          <footer>Someone famous in <cite title="Source Title">Source Title</cite></footer>
+        </blockquote>
+      </div>
+    </div>
+
+
+  </div>
+
+
+  <div class="col-md-6">
+    <div class="card card-outline-primary text-center" hidden>
+      <h3 class="card-header">{{selItemName}}</h3>
+      <div class="card-block">
+        <blockquote class="card-blockquote">
+          <img class="card-img-top" 
+          src="http://www.elmers.com/images/default-source/product-catalog-images/e520-jpg.tmb-thumb230.jpg?Status=Master&sfvrsn=7"
+          style="width:100%; height:300px;" alt="Card image cap">
+
+          <h5>All Purpose Office Glue Sticks</h5>
+          <table class="table table-sm ">
+            <tr>
+              <td>
+                Qty
+              </td>
+              <td>
+                3 packs
+              </td>
+            </tr>
+
+            <tr>
+              <td></td>
+              <td>
+                
+              </td>
+            </tr>
+          </table>
+
+          <p class=" text-muted text-sm-left">
+            Elmer's all-purpose glue stick is everyone's favorite for easy, no-mess, permanent bonding. It works on a variety of paper types--including cardboard, foam board, display board, computer paper and more. It goes on smooth and dries fast, clear and colorless. It is washable, acid free, photo safe, and non-toxic.
+          </p>
+
+
+          <div class="card card-outline-primary" hidden>
+            <div class="card-block">
+              <blockquote class="card-blockquote">
+                
+                <table class="table text-left table-responsive ">
+                  <tr>
+                    <td>
+                      <div class="form-check">
+                          <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked="">
+                            <strong>Class Room Items</strong>
+                          </label>
+                        </div>
+                    </td>
+                    <td>
+                      <div class="form-check">
+                          <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked="">
+                            <strong>All Students</strong>
+                          </label>
+                        </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="form-check">
+                          <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked="">
+                            <strong>Boys</strong>
+                          </label>
+                        </div>
+                    </td>
+                    <td>
+                      <div class="form-check">
+                          <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked="">
+                            <strong>Girls</strong>
+                          </label>
+                        </div>
+                    </td>
+                  </tr>
+                </table>
+
+
+              </blockquote>
+            </div>
+          </div>
+
+
+          
+          <footer>Someone famous in <cite title="Source Title">Source Title</cite></footer>
+        </blockquote>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="btn-group pull-right" role="group" aria-label="Basic example">
+          <button (click)="addNewSchool()" type="button" class="btn btn-outline-success"> 
+            <i class="fa fa-plus"></i>
+            <span>Add</span>
+          </button>
+
+          <button (click)="editSchool()" type="button" class="btn btn-outline-info">
+            <i class="fa fa-edit"></i>
+            Edit
+          </button>
+          <button type="button" class="btn btn-outline-danger">
+            <i class="fa fa-trash"></i>
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="card card-outline-primary text-center">
+      <h3 class="card-header">{{selItemName}}</h3>
+      <div class="card-block">
+        <form #f="ngForm">
+          <blockquote class="card-blockquote">
+            <h5>{{selItemType}}</h5>
+            <img class="img-fluid" src={{selItemImageUrl}} style="width:50%; height:225px;" alt="Card image cap">
+
+<!-- src="http://www.elmers.com/images/default-source/product-catalog-images/e520-jpg.tmb-thumb230.jpg?Status=Master&sfvrsn=7" -->
+
+            <h5>{{selItemDesc}} - {{selItemQty}}</h5>
+            <p class=" text-muted text-sm-left">{{selItemNotes}}</p>
+            
+            <table class="table table-sm text-left">
+              <tr>
+                <td>
+                  <label for="txtName">Item Name</label>
+                </td>
+                <td>
+                  <input [(ngModel)]="selItemName" type="text" class="form-control" name="txtName" id="txtName" placeholder="Item Name">
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <label for="txtDesc">Item Desciption</label>
+                </td>
+                <td>
+                  <input [(ngModel)]="selItemDesc" type="text" class="form-control" name="txtDesc" id="txtDesc" placeholder="Desciption">
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <label for="txtQty">Qty</label>
+                </td>
+                <td>  
+                  <input [(ngModel)]="selItemQty" type="text" class="form-control" name="txtQty" id="txtQty" placeholder="QUanty">
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2">
+                  <label for="txtImageUrl">Image URL</label>
+                  <input [(ngModel)]="selItemImageUrl" type="text" class="form-control" name="txtImageUrl" id="txtImageUrl" placeholder="Image URL">
+                </td>
+              </tr>
+
+              <tr>
+                <td colspan="2">
+                  <label for="txtNotes">Note</label>
+                  <textarea [(ngModel)]="selItemNotes" class="form-control" name="txtNotes" id="txtNotes" cols="5" rows="3"></textarea>
+                </td>
+              </tr>
+
+              <tr>
+                <td colspan="2">
+                  <label class="text-primary text-uppercase" for="txtRetail02">Suggested Retail 01</label>
+                  <a href="{{selItemRetail01}}" class="btn btn-sm btn-outline-primary" target="_blank"><i class="fa fa fa-safari"></i>{{selItemRetail01Name}}</a>
+                  <input [(ngModel)]="selItemRetail01Name" type="text" class="form-control" name="txtRetail01Name" id="txtRetail01Name" placeholder="Retailor Name">
+                  <input [(ngModel)]="selItemRetail01" type="text" class="form-control" name="txtRetail01" id="txtRetail01" placeholder="Site">
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2">
+                  <label class="text-primary text-uppercase" for="txtRetail02">Suggested Retail 02</label>
+                  <a href="{{selItemRetail02}}" class="btn btn-sm btn-outline-primary" target="_blank"><i class="fa fa fa-safari"></i>{{selItemRetail02Name}}</a>
+                  <input [(ngModel)]="selItemRetail02Name" type="text" class="form-control" name="txtRetail02Name" id="txtRetail02Name" placeholder="Retailor Name">
+                  <input [(ngModel)]="selItemRetail02" type="text" class="form-control" name="txtRetail02" id="txtRetail02" placeholder="Site">
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2">
+                  <label class="text-primary text-uppercase"  for="txtRetail03">Suggested Retail 03</label>
+                  <a href="{{selItemRetail03}}" class="btn btn-sm btn-outline-primary" target="_blank"><i class="fa fa fa-safari"></i>{{selItemRetail03Name}}</a>
+                  <input [(ngModel)]="selItemRetail03Name" type="text" class="form-control" name="txtRetail03Name" id="txtRetail03Name" placeholder="Retailor Name">
+                  <input [(ngModel)]="selItemRetail03" type="text" class="form-control" name="txtRetail03" id="txtRetail03" placeholder="Site">
+                </td>
+              </tr>
+            </table>
+
+
+            <div class="card card-outline-info" >
+              <div class="card-block">
+                <blockquote class="card-blockquote">
+                  
+                  <table class="table text-left table-responsive ">
+                    <tr>
+                     
+                      <td>
+                        <div class="form-check">
+                            <label class="form-check-label">
+                              <input [(ngModel)]="selItemType" class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="All Students" checked>
+                              <strong>All Students</strong>
+                            </label>
+                          </div>
+                      </td>
+                        <td>
+                        <div class="form-check">
+                            <label class="form-check-label">
+                              <input [(ngModel)]="selItemType" class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="Boys Only" checked="">
+                              <strong>Boys Only </strong>
+                            </label>
+                          </div>
+                      </td>
+                      <td>
+                        <div class="form-check">
+                            <label class="form-check-label">
+                              <input [(ngModel)]="selItemType" class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="Girls Only" checked="">
+                              <strong>Girls Only </strong>
+                            </label>
+                          </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      
+                      <td>
+                        <div class="form-check">
+                            <label class="form-check-label">
+                              <input [(ngModel)]="selItemType" class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="Class Room Items" checked="">
+                              <strong>Class Room Item</strong>
+                            </label>
+                          </div>
+                      </td>
+                    </tr>
+
+                  </table>
+
+
+                </blockquote>
+            </div>
+          </div>
+          <br>
+          <button class="btn btn-outline-success btn-block btn-lg">Save</button>
+          <footer>Someone famous in <cite title="Source Title">Source Title</cite></footer>
+        </blockquote>
+
+        </form>
+      </div>
+    </div>
+
+
+  </div>
+
+</div>

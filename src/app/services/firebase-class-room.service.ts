@@ -15,6 +15,21 @@ export class FirebaseClassRoomService {
     
   }
 
+  delClassRoom(key){
+    return this.classRoomList.remove(key);
+  }
+
+  updateClassRoom(key, classRm){
+    console.log("classRm", classRm);
+
+    return this.classRoomList.update(key, classRm);
+  }
+
+  addClassRoom(newClassRm){
+    console.log('newClassRm', newClassRm);
+    return  this.classRoomList.push(newClassRm);
+  }
+
   getClassRmDetails(schoolKey, key){
     let fbClassRoom: string = environment.FB_NODE_SCHOOL.name + "/" + schoolKey + "/" + environment.FB_NODE_CLASSROOM.name + "/" + key
     this.classRoom = this.db.object(fbClassRoom) as FirebaseObjectObservable<ClassRoom>;
@@ -26,7 +41,7 @@ export class FirebaseClassRoomService {
     let fbClassRoom: string = environment.FB_NODE_SCHOOL.name + "/" + schoolKey + "/" + environment.FB_NODE_CLASSROOM.name
     this.classRoomList = this.db.list(fbClassRoom, {
       query: {
-        orderByChild: environment.FB_NODE_CLASSROOM.FB_ITEM_CLASSRM.ITEM_NAME
+        orderByChild: environment.FB_NODE_CLASSROOM.FB_ITEM_CLASSRM.ITEM_SortKey
       }
     }) as FirebaseListObservable<ClassRoom[]>
 
@@ -41,6 +56,6 @@ interface ClassRoom {
   name?: string;
   namelong?: string;
   nameShort?: string;
-  note01?: string;
+  classNotes?: string;
   
 }

@@ -29,11 +29,12 @@ export const environment = {
     name:  "/classrooms",
     FB_ITEM_CLASSRM: {
       ITEM_KEY: "key",
-      ITEM_SCHOOL_KEY: "schoolkey",
+      ITEM_SCHOOL_KEY: "schoolKey",
       ITEM_NAME: "name",
       ITEM_Namelong: "namelong",
       ITEM_NameShort: "nameshort",
-      ITEM_Notes01: "notes"
+      ITEM_Notes01: "classNotes",
+      ITEM_SortKey: "sortKey"
     }
   }
 };

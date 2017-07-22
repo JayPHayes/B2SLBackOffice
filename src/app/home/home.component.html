@@ -1,5 +1,9 @@
 <div class="container">
-
+<ol class="breadcrumb">
+  <li class="breadcrumb-item active"><a >Home</a></li>
+  <li class="breadcrumb-item "> <a [routerLink]="['/schools']">Schools</a>  </li>
+  <li class="breadcrumb-item "> <a [routerLink]="['/classrooms']">Class Rooms</a> </li>
+</ol>
 
 <div >
   <div class="row" >
@@ -91,7 +95,7 @@
               </div>
             </div>
             <br>
-            <a [routerLink]="['/classitems']" class="btn btn-outline-primary btn-block">Go</a>
+            <a [routerLink]="['/masteritems']" class="btn btn-outline-primary btn-block">Go</a>
           </div>
         </div>
       </div>
