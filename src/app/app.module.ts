@@ -1,4 +1,4 @@
-import { FirebaseClassRoomService } from './services/firebase-class-room.service';
+
 import { environment } from './../environments/environment';
 import { SchoolsComponent } from './schools/schools.component';
 import { HomeComponent } from './home/home.component';
@@ -12,7 +12,8 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { FirebaseService } from './services/firebase.service';
-
+import { FirebaseClassRoomService } from './services/firebase-class-room.service';
+import { FirebaseMastItemService } from './services/firebase-mast-item.service';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -57,7 +58,7 @@ const appRoutes: Routes = [
 
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [FirebaseService, FirebaseClassRoomService],
+  providers: [FirebaseService, FirebaseClassRoomService, FirebaseMastItemService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

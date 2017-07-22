@@ -1,7 +1,7 @@
 
 <div class="row">
 
-  <div class="col-md-5">
+  <div class="col-md-7">
     <div class="card card-outline-primary">
       <div class="card-block">
         <blockquote class="card-blockquote">
@@ -18,35 +18,18 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
+                <tr *ngFor="let i of itemList" [class.table-active]="i.$key == selectedKey">
                   <th scope="row">
-                    <button (click)="selectSchool(s.$key)" class="btn btn-outline-primary btn-sm">
+                    <button (click)="selectItem(i.$key)" class="btn btn-outline-primary btn-sm">
                         <i class="fa fa-arrow-right"></i> 
                       </button>
                   </th>
                   <th>
-                    1 box
+                    {{i.itemQty}}
                   </th>
                   
-                  <td>24 Ct Crayola crayons</td>
-                  <td>Girls </td>
-                  <td>
-                      <button (click)="delSchool(s.$key)" class="btn btn-danger btn-sm">
-                        <i class="fa fa-trash-o"></i> 
-                      </button>
-                    </td>
-                </tr>
-                <tr>
-                  <th scope="row">
-                    <button (click)="selectSchool(s.$key)" class="btn btn-outline-primary btn-sm">
-                        <i class="fa fa-arrow-right"></i> 
-                      </button>
-                  </th>
-                    <th>
-                      3 Packs
-                    </th>
-                  <td>1" White Binders - With clear view front pockets</td>
-                  <td></td>
+                  <td>{{i.itemName}}</td>
+                  <td>{{i.itemType}} </td>
                   <td>
                       <button (click)="delSchool(s.$key)" class="btn btn-danger btn-sm">
                         <i class="fa fa-trash-o"></i> 
@@ -67,7 +50,7 @@
   </div>
 
 
-  <div class="col-md-6">
+  <div class="col-md-5">
     <div class="card card-outline-primary text-center" hidden>
       <h3 class="card-header">{{selItemName}}</h3>
       <div class="card-block">
@@ -177,7 +160,7 @@
     <div class="card card-outline-primary text-center">
       <h3 class="card-header">{{selItemName}}</h3>
       <div class="card-block">
-        <form #f="ngForm">
+        <form #f="ngForm" (ngSubmit)="saveItem()">
           <blockquote class="card-blockquote">
             <h5>{{selItemType}}</h5>
             <img class="img-fluid" src={{selItemImageUrl}} style="width:50%; height:225px;" alt="Card image cap">
@@ -306,7 +289,7 @@
             </div>
           </div>
           <br>
-          <button class="btn btn-outline-success btn-block btn-lg">Save</button>
+          <button type="submit" class="btn btn-outline-success btn-block btn-lg">Save</button>
           <footer>Someone famous in <cite title="Source Title">Source Title</cite></footer>
         </blockquote>
 
