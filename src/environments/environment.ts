@@ -34,7 +34,8 @@ export const environment = {
       ITEM_Namelong: "namelong",
       ITEM_NameShort: "nameshort",
       ITEM_Notes01: "classNotes",
-      ITEM_SortKey: "sortKey"
+      ITEM_SortKey: "sortKey",
+      ITEM_ClassItemList: "class_items"
     }
   },
   FB_NODE_MAST_ITEM: {

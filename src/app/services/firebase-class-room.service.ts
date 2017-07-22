@@ -9,6 +9,7 @@ import * as firebase from 'firebase';
 export class FirebaseClassRoomService {
   classRoom: FirebaseObjectObservable<ClassRoom>
   classRoomList: FirebaseListObservable<ClassRoom[]>
+  classRoomItemList: FirebaseListObservable<ClassItem[]>
 
 
   constructor(private db: AngularFireDatabase) { 
@@ -17,6 +18,25 @@ export class FirebaseClassRoomService {
 
   delClassRoom(key){
     return this.classRoomList.remove(key);
+  }
+
+  getClassRoomItems(schoolKey, classKey){
+    let fbSchoolPath:String = environment.FB_NODE_SCHOOL.name + "/" + schoolKey + "/"
+    let fbClassRoomPath: String =  fbSchoolPath + environment.FB_NODE_CLASSROOM.name + "/" + classKey + "/"
+    let fbClassRoomItemsPath: string = fbClassRoomPath + environment.FB_NODE_CLASSROOM.FB_ITEM_CLASSRM.ITEM_ClassItemList
+
+    this.classRoomItemList = this.db.list(fbClassRoomItemsPath) as FirebaseListObservable<ClassItem[]>;
+    return this.classRoomItemList
+  }
+
+
+  addClassRoomItem(schoolKey, classKey, newItem){
+    let fbSchoolPath:String = environment.FB_NODE_SCHOOL.name + "/" + schoolKey + "/"
+    let fbClassRoomPath: String =  fbSchoolPath + environment.FB_NODE_CLASSROOM.name + "/" + classKey + "/"
+    let fbClassRoomItemsPath: string = fbClassRoomPath + environment.FB_NODE_CLASSROOM.FB_ITEM_CLASSRM.ITEM_ClassItemList
+
+    let classRoomItemList = this.db.list(fbClassRoomItemsPath) as FirebaseListObservable<ClassItem>;
+    return  classRoomItemList.push(newItem);
   }
 
   updateClassRoom(key, classRm){
@@ -48,6 +68,24 @@ export class FirebaseClassRoomService {
     return this.classRoomList;
   }
 
+
+}
+
+interface ClassItem {
+  $key?: string;
+  itemName?: string;
+  itemDesc?: string;
+  itemQty?: string;
+  itemImageUrl?: string;
+  itemNotes?: string;
+  itemType?: string;
+  itemRetail01?: string;
+  itemRetail01Name?: string;
+  itemRetail02?: string;
+  itemRetail02Name?: string;
+  itemRetail03?: string;
+  itemRetail03Name?: string;
+      
 }
 
 interface ClassRoom {

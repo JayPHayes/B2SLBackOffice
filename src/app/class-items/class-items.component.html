@@ -9,7 +9,7 @@
 
 <div class="row" >
   <div class="col-md-6" >
-    <br><br>
+    
     <div class="card card-outline-primary " [hidden]="isSelected">
       <div class="card-block">
         <table class="table table-sm table-bordered">
@@ -31,8 +31,8 @@
               <td>{{s.name}}</td>
               <td>{{s.classrooms?.length}}</td>
               <td>
-                <button (click)="delSchool(s.$key)" class="btn btn-danger btn-sm">
-                  <i class="fa fa-trash-o"></i> 
+                <button class="btn btn-primary btn-sm">
+                  <i class="fa fa-gears"></i> 
                 </button>
               </td>
             </tr>
@@ -46,86 +46,162 @@
       </div>
     </div>
 
-    <div class="card card-outline-primary " [hidden]="!isSelected">
+    <div [hidden]="selClassRmKey">
+        <div class="card card-outline-primary " [hidden]="!isSelected">
+          <div class="card-block">
+            <div class="row">
+              <div class="col-sm-3">
+                <button class="btn btn-outline-primary btn-sm" (click)="isSelected = !isSelected">
+                  <i class="fa fa fa-backward"></i>
+                  <span>Back</span>
+                </button>
+              </div>
+
+              <div class="col-sm-9">
+                <h4 class="card-title">{{selSchoolName}}</h4>
+              </div>
+              
+            </div>
+
+            <div class="row">
+              <div class="col-12-sm">
+                <div class="btn-group pull-right" role="group" aria-label="Basic example">
+                  <button class="btn btn-secondary btn-sm" (click)="isGradSchool = !isGradSchool" [hidden]="!isGradSchool">
+                    <i class="fa fa fa-backward"></i>
+                    <span>grade school</span>
+                </button>
+                  <button type="button" class="btn btn-secondary" [hidden]="isGradSchool" (click)="quickSave('Kindergarten', 0)">K</button>
+                  <button type="button" class="btn btn-secondary" [hidden]="isGradSchool" (click)="quickSave('1st Grade', 11)">1</button>
+                  <button type="button" class="btn btn-secondary" [hidden]="isGradSchool" (click)="quickSave('2nd Grade', 12)">2</button>
+                  <button type="button" class="btn btn-secondary" [hidden]="isGradSchool" (click)="quickSave('3rd Grade', 13)">3</button>
+                  <button type="button" class="btn btn-secondary" [hidden]="isGradSchool" (click)="quickSave('4th Grade', 14)">4</button>
+                  <button type="button" class="btn btn-secondary" [hidden]="isGradSchool" (click)="quickSave('5th Grade', 15)">5</button>
+                  <button type="button" class="btn btn-secondary" [hidden]="isGradSchool" (click)="quickSave('6th Grade', 16)">6</button>
+                  <button type="button" class="btn btn-secondary" [hidden]="isGradSchool" (click)="quickSave('7th Grade', 17)">7</button>
+                  <button type="button" class="btn btn-secondary" [hidden]="isGradSchool" (click)="quickSave('8th Grade', 18)">8</button>
+
+                  <button type="button" class="btn btn-secondary" [hidden]="!isGradSchool" (click)="quickSave('9th Grade',  209)">9</button>
+                  <button type="button" class="btn btn-secondary" [hidden]="!isGradSchool" (click)="quickSave('10th Grade', 210)">10</button>
+                  <button type="button" class="btn btn-secondary" [hidden]="!isGradSchool" (click)="quickSave('11th Grade', 211)">11</button>
+                  <button type="button" class="btn btn-secondary" [hidden]="!isGradSchool" (click)="quickSave('12th Grade', 212)">12</button>
+
+                  <button class="btn btn-secondary btn-sm" (click)="isGradSchool = !isGradSchool" [hidden]="isGradSchool">
+                    <span>high school</span>
+                    <i class="fa fa fa-forward"></i>
+                </button>
+
+                </div>
+              </div>
+              <br><br>
+            </div>
+            
+            <table class="table table-sm table-bordered">
+              <thead class="thead-default">
+                <tr>
+                  <th>#</th>
+                  <th>Class Room</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let c of classRmList" [class.table-active]="c.$key == selClassRmKey" >
+                  <td>
+                    <button (click)="selectClass(selectedKey, c.$key)" class="btn btn-outline-primary btn-sm">
+                      <i class="fa fa-arrow-right"></i> 
+                    </button>
+                  </td>
+                  <td>{{c.name}}</td>
+                  <td>
+                    <button (click)="delClassRm(c.$key)" class="btn btn-danger btn-sm">
+                      <i class="fa fa-trash-o"></i> 
+                    </button>
+                  </td>
+                </tr>
+
+                
+              </tbody>
+            </table>
+
+              <div class="text-muted" style="font-size: xx-small;">
+                <footer>
+                  <span> {{selSchoolName}} Key {{selectedKey}}  </span>
+                  <br>
+                  <span>Selected Class Room  Key: {{selClassRmKey}}</span>
+
+                  <br>
+                  <cite title="Source Title">Class Room count: 0</cite>
+                </footer>
+              </div>
+            
+          </div>
+        </div> 
+    </div>
+
+   
+
+    <div class="card card-outline-primary " [hidden]="!selClassRmKey">
       <div class="card-block">
         <div class="row">
           <div class="col-sm-3">
-             <button class="btn btn-outline-primary btn-sm" (click)="isSelected = !isSelected">
+             <button class="btn btn-outline-primary btn-sm" (click)="selClassRmKey = null">
               <i class="fa fa fa-backward"></i>
               <span>Back</span>
             </button>
           </div>
 
           <div class="col-sm-9">
-            <h4 class="card-title">{{selSchoolName}}</h4>
+            <h4 class="card-title">Item Master List</h4>
           </div>
           
         </div>
 
-        <div class="row">
-          <div class="col-12-sm">
-            <div class="btn-group pull-right" role="group" aria-label="Basic example">
-              <button class="btn btn-secondary btn-sm" (click)="isGradSchool = !isGradSchool" [hidden]="!isGradSchool">
-                <i class="fa fa fa-backward"></i>
-                <span>grade school</span>
-            </button>
-              <button type="button" class="btn btn-secondary" [hidden]="isGradSchool" (click)="quickSave('Kindergarten', 0)">K</button>
-              <button type="button" class="btn btn-secondary" [hidden]="isGradSchool" (click)="quickSave('1st Grade', 11)">1</button>
-              <button type="button" class="btn btn-secondary" [hidden]="isGradSchool" (click)="quickSave('2nd Grade', 12)">2</button>
-              <button type="button" class="btn btn-secondary" [hidden]="isGradSchool" (click)="quickSave('3rd Grade', 13)">3</button>
-              <button type="button" class="btn btn-secondary" [hidden]="isGradSchool" (click)="quickSave('4th Grade', 14)">4</button>
-              <button type="button" class="btn btn-secondary" [hidden]="isGradSchool" (click)="quickSave('5th Grade', 15)">5</button>
-              <button type="button" class="btn btn-secondary" [hidden]="isGradSchool" (click)="quickSave('6th Grade', 16)">6</button>
-              <button type="button" class="btn btn-secondary" [hidden]="isGradSchool" (click)="quickSave('7th Grade', 17)">7</button>
-              <button type="button" class="btn btn-secondary" [hidden]="isGradSchool" (click)="quickSave('8th Grade', 18)">8</button>
-
-              <button type="button" class="btn btn-secondary" [hidden]="!isGradSchool" (click)="quickSave('9th Grade',  209)">9</button>
-              <button type="button" class="btn btn-secondary" [hidden]="!isGradSchool" (click)="quickSave('10th Grade', 210)">10</button>
-              <button type="button" class="btn btn-secondary" [hidden]="!isGradSchool" (click)="quickSave('11th Grade', 211)">11</button>
-              <button type="button" class="btn btn-secondary" [hidden]="!isGradSchool" (click)="quickSave('12th Grade', 212)">12</button>
-
-              <button class="btn btn-secondary btn-sm" (click)="isGradSchool = !isGradSchool" [hidden]="isGradSchool">
-                <span>high school</span>
-                <i class="fa fa fa-forward"></i>
-            </button>
-
+          <div class="row">
+            <div class="col-12-sm">
+              <input type="text" [(ngModel)]="search" name="search" id="search" class="form-control" placeholder="Item Search">
+              <table class="table table-sm table-bordered table-hover">
+                  <thead>
+                    <tr>
+                      <th>Qty</th>
+                      <th>#</th>
+                      <th>Item Name</th>
+                      
+                      <th></th>
+                      
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let i of itemList | filter:search" [class.table-active]="i.$key == selectedItem?.$key">
+                      <th scope="row">
+                        <button (click)="selectItem(i.$key)" class="btn btn-outline-primary btn-sm">
+                            <i class="fa fa-arrow-right"></i> 
+                          </button>
+                      </th>
+                      <th>
+                        {{i.itemQty}}
+                      </th>
+                      
+                      <td>{{i.itemName}}</td>
+                      
+                      <td>
+                          <button (click)="delItem(i.$key)" class="btn btn-danger btn-sm">
+                            <i class="fa fa-trash-o"></i> 
+                          </button>
+                        </td>
+                    </tr>
+                  </tbody>
+              </table>
             </div>
+            <br><br>
           </div>
-          <br><br>
-        </div>
-
-        <!-- <h6 class="card-subtitle mb-2 text-muted">School Notes</h6> -->
+       
         
-        <table class="table table-sm table-bordered">
-          <thead class="thead-default">
-            <tr>
-              <th>#</th>
-              <th>Class Room</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-          <tr *ngFor="let c of classRmList" >
-              <td>
-                <button (click)="selectClass(selectedKey, c.$key)" class="btn btn-outline-primary btn-sm">
-                  <i class="fa fa-arrow-right"></i> 
-                </button>
-              </td>
-              <td>{{c.name}}</td>
-              <td>
-                <button (click)="delClassRm(c.$key)" class="btn btn-danger btn-sm">
-                  <i class="fa fa-trash-o"></i> 
-                </button>
-              </td>
-            </tr>
 
-            
-          </tbody>
-        </table>
-
-          <div class="text-center">
+          <div class="text-muted" style="font-size: xx-small;">
             <footer>
-              <span> {{selSchoolName}} School  </span>
+              <span> {{selSchoolName}} Key {{selectedKey}}  </span>
+              <br>
+              <span>Selected Class Room  Key: {{selClassRmKey}}</span>
+
               <br>
               <cite title="Source Title">Class Room count: 0</cite>
             </footer>
@@ -141,24 +217,7 @@
   <div class="col-md-6">
     
     <div class="row">
-      <div class="col-sm-12" [hidden]="!isSelected">
-        <div class="btn-group pull-right" role="group" aria-label="Basic example">
-          <button (click)="addClass()" type="button" class="btn btn-outline-success"> 
-            <i class="fa fa-plus"></i>
-            <span>Add</span>
-          </button>
-
-          <button (click)="editClass()" type="button" class="btn btn-outline-info">
-            <i class="fa fa-edit"></i>
-            Edit.
-          </button>
-          <button type="button" class="btn btn-outline-danger">
-            <i class="fa fa-trash"></i>
-            Delete
-          </button>
-        </div>
-      </div>
-
+     
       <div class="col-sm-12" [hidden]="!isSelected">
         <div class="card">
           <img class="card-img-top" src="{{selSchoolImage}}" style="width:100%; height:200px;" alt="B2SL School Image for {{selSchoolName}}">
@@ -168,59 +227,29 @@
             <p class="card-text text-muted">
               {{selClassRmNotes}}
             </p>
-            <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
-
+            <table class="table table-bordered table-sm table-hover">
+                <tr *ngFor="let i of classRmItemList">
+                  <td>
+                    <button  class="btn btn-outline-primary btn-sm">
+                      <i class="fa fa-arrow-right"></i> 
+                    </button>
+                  </td>
+                  <td>{{i.name}}	</td>
+                  <td>
+                    <button  class="btn btn-outline-danger btn-sm">
+                      <i class="fa fa-trash-o"></i> 
+                    </button>
+                  </td>
+              </tr>
+       
+            </table>
             <span class="text-center text-muted" style="font-size: x-small;">Key: {{selClassRmKey}}</span>
           </div>
         </div>
       </div>
-
     </div>
   
     <hr>
-
-    <div class="row" [hidden]="isDisplay">
-      <div class="col-sm-12">
-
-        <div class="card card-outline-primary ">
-          <div class="card-block">
-            <blockquote class="card-blockquote">
-                 <button  class="btn btn-outline-primary btn-sm" (click)="isDisplay = !isDisplay">
-                   <i class="fa fa-backward"></i>
-                   Back
-                  </button> 
-
-                <form action="">
-                  <table class="table table-bordered  table-sm">
-                    <tr>
-                      <td>Grade Name</td>
-                      <td>
-                        <input [(ngModel)]="selClassRmName" class="form-control" type="text" id="txtGradeName" name="txtGradeName" placeholder="Enter Class Room Name">
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Notes</td>
-                      <td>
-                        <textarea [(ngModel)]="selClassRmNotes" class="form-control" name="txtNotes" id="txtNotes" cols="30" rows="10"></textarea>
-                      </td>
-                    </tr>
-
-                  </table>
-
-                  <button (click)="saveClass(selClassRmKey)" class="btn btn-outline-success btn-block">Save Class</button>
-
-                  <span class="text-muted" style="font-size: :x-small;">key: {{selClassRmKey}}</span>
-                </form> 
-            </blockquote>
-          </div>
-        </div>
-
-
-
-     
-      </div>
-    </div>
-  
   
   </div>
 
