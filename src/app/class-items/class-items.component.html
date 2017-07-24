@@ -8,7 +8,7 @@
 
 
 <div class="row" >
-  <div class="col-md-6" >
+  <div class="col-md-5" >
     
     <div class="card card-outline-primary " [hidden]="isSelected">
       <div class="card-block">
@@ -17,7 +17,7 @@
             <tr>
               <th>#</th>
               <th>School Name</th>
-              <th>Class Count</th>
+              <!-- <th>Class Count</th> -->
               <th></th>
             </tr>
           </thead>
@@ -29,7 +29,7 @@
                 </button>
               </td>
               <td>{{s.name}}</td>
-              <td>{{s.classrooms?.length}}</td>
+              <!-- <td>{{s.classrooms?.length}}</td> -->
               <td>
                 <button class="btn btn-primary btn-sm">
                   <i class="fa fa-gears"></i> 
@@ -68,7 +68,7 @@
                 <div class="btn-group pull-right" role="group" aria-label="Basic example">
                   <button class="btn btn-secondary btn-sm" (click)="isGradSchool = !isGradSchool" [hidden]="!isGradSchool">
                     <i class="fa fa fa-backward"></i>
-                    <span>grade school</span>
+                    <!-- <span>grade school</span> -->
                 </button>
                   <button type="button" class="btn btn-secondary" [hidden]="isGradSchool" (click)="quickSave('Kindergarten', 0)">K</button>
                   <button type="button" class="btn btn-secondary" [hidden]="isGradSchool" (click)="quickSave('1st Grade', 11)">1</button>
@@ -86,7 +86,7 @@
                   <button type="button" class="btn btn-secondary" [hidden]="!isGradSchool" (click)="quickSave('12th Grade', 212)">12</button>
 
                   <button class="btn btn-secondary btn-sm" (click)="isGradSchool = !isGradSchool" [hidden]="isGradSchool">
-                    <span>high school</span>
+                    <!-- <span>high school</span> -->
                     <i class="fa fa fa-forward"></i>
                 </button>
 
@@ -165,11 +165,10 @@
                       <th>#</th>
                       <th>Item Name</th>
                       
-                      <th></th>
-                      
                     </tr>
                   </thead>
                   <tbody>
+                                                                   
                     <tr *ngFor="let i of itemList | filter:search" [class.table-active]="i.$key == selectedItem?.$key">
                       <th scope="row">
                         <button (click)="selectItem(i.$key)" class="btn btn-outline-primary btn-sm">
@@ -182,11 +181,6 @@
                       
                       <td>{{i.itemName}}</td>
                       
-                      <td>
-                          <button (click)="delItem(i.$key)" class="btn btn-danger btn-sm">
-                            <i class="fa fa-trash-o"></i> 
-                          </button>
-                        </td>
                     </tr>
                   </tbody>
               </table>
@@ -214,7 +208,7 @@
   </div>
 
 
-  <div class="col-md-6">
+  <div class="col-md-7">
     
     <div class="row">
      
@@ -223,27 +217,81 @@
           <img class="card-img-top" src="{{selSchoolImage}}" style="width:100%; height:200px;" alt="B2SL School Image for {{selSchoolName}}">
           <div class="card-block">
             <h2 class="card-title">{{selClassRmName}}</h2>
-            <h6 class="text-muted">  Notes</h6>
-            <p class="card-text text-muted">
-              {{selClassRmNotes}}
-            </p>
+            <div class="row">
+              <div class="col-sm-5">
+                <h6 class="text-muted">  Notes</h6>
+              </div>
+              <div class="col-sm-5">
+                <input [(ngModel)]="updatedQty" type="text" class="form-control">
+                <p class="card-text text-muted">{{selClassRmNotes}}</p>    
+              </div>
+              <div class="col-sm-2">
+                <button (click)="setQty(selClassRoomItemKey )" class="btn btn-outline-primary">Go</button>
+              </div>
+            </div>
+            
             <table class="table table-bordered table-sm table-hover">
-                <tr *ngFor="let i of classRmItemList">
-                  <td>
-                    <button  class="btn btn-outline-primary btn-sm">
+                                                      
+                <tr *ngFor="let i of classRmItemList " [class.table-active]="i.$key ==  selClassRoomItemKey">
+                   <td>
+                    <button (click)="selectClassRoomItemkey(i.$key)"  class="btn btn-outline-primary btn-sm"  >
                       <i class="fa fa-arrow-right"></i> 
                     </button>
                   </td>
+                  <td>
+                      {{i?.qty}} {{i?.measure}}
+                  </td>
+
                   <td>{{i.name}}	</td>
                   <td>
-                    <button  class="btn btn-outline-danger btn-sm">
+                    <button (click)="setItemType(i.$key, '1B ')"  class="btn btn-outline-secondary btn-sm" [hidden]="i.itemType == '1B '">
+                      <i class="fa fa-male"></i> 
+                    </button>
+                    <button (click)="setItemType(i.$key, '1B ')"  class="btn btn-info btn-sm" [hidden]="i.itemType != '1B '">
+                      <i class="fa fa-male"></i> 
+                    </button>
+                  </td>
+                  <td>
+                    
+                    <button (click)="setItemType(i.$key, '2G ')"  class="btn btn-outline-secondary btn-sm"  [hidden]="i.itemType == '2G '"> 
+                      <i class="fa fa-female"></i> 
+                    </button>
+                    <button (click)="setItemType(i.$key, '2G ')"  class="btn  btn-sm" style="color:white; background-color: deeppink" [hidden]="i.itemType != '2G '">
+                      <i class="fa fa-female"></i> 
+                    </button>
+                  </td>
+
+                  <td>
+                    <button (click)="setItemType(i.$key,'3C ')"  class="btn btn-outline-secondary btn-sm" [hidden]="i.itemType == '3C '">
+                      <i class="fa fa-graduation-cap"></i> 
+                    </button>
+                    <button (click)="setItemType(i.$key,'3C ')"  class="btn btn-success btn-sm" [hidden]="i.itemType != '3C '">
+                      <i class="fa fa-graduation-cap"></i> 
+                    </button>
+                  </td>
+
+                  <td>
+                    <button (click)="setItemType(i.$key,'00 ')"  class="btn btn-outline-secondary btn-sm" [hidden]="i.itemType == '00 '">
+                      <i class="fa fa-asterisk"></i> 
+                    </button>
+                    <button (click)="setItemType(i.$key,'00 ')"  class="btn btn-outline-primary btn-sm" [hidden]="i.itemType != '00 '">
+                      <i class="fa fa-asterisk"></i> 
+                    </button>
+                  </td>
+
+
+                  <td>
+                    <button (click)="delItem(i.$key)"  class="btn btn-outline-danger btn-sm">
                       <i class="fa fa-trash-o"></i> 
                     </button>
                   </td>
+                  
               </tr>
        
             </table>
             <span class="text-center text-muted" style="font-size: x-small;">Key: {{selClassRmKey}}</span>
+            <br>
+            <span class="text-center text-muted" style="font-size: x-small;">Key: {{selClassRoomItemKey}}</span>
           </div>
         </div>
       </div>

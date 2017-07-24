@@ -19,6 +19,10 @@ export class ClassItemsComponent implements OnInit {
   classRmList: any;
   itemList: any;
   classRmItemList: any;
+  updatedQty: string = "";
+
+  selClassRoomItemKey: any;
+
 
   isSelected: boolean = false;
   isDisplay: boolean = true;
@@ -71,13 +75,10 @@ export class ClassItemsComponent implements OnInit {
   ngOnInit() {
      this.firebaseSvc.getSchools().subscribe(school => {
       this.schoolList = school
-      console.log(this.schoolList)
     });
 
     this.firebaseMastItemSvc.getItems().subscribe(items => {
-      console.log(items);
       this.itemList = items;
-      console.log('this.itemList', this.itemList);
     });
 
 
@@ -120,7 +121,6 @@ export class ClassItemsComponent implements OnInit {
       classNotes: this.selClassRmNotes 
     }
 
-    console.log(updateClassRm)
     if(this.selClassRmKey){
       this.firebaseClassRoomSvc.updateClassRoom(this.selClassRmKey, updateClassRm);
     } else {
@@ -141,13 +141,34 @@ export class ClassItemsComponent implements OnInit {
     this.isDisplay = !this.isDisplay;
   }
 
+
+  selectClassRoomItemkey(key){
+    this.selClassRoomItemKey = key;
+  }
+  setQty(key){
+    // this.selClassRoomItemKey = key;
+
+    let classRmItemQty = {
+      qty: this.updatedQty
+    }
+
+    this.firebaseClassRoomSvc.setQty(key, classRmItemQty)
+  }
+
+  setItemType(key, itemTypeBGC){
+    this.selClassRoomItemKey = key;
+
+    let classRmType = {
+      itemType: itemTypeBGC,
+      sortKey: itemTypeBGC + this.selItemName
+    }
+
+    this.firebaseClassRoomSvc.setClassRoomType(key, classRmType)
+  }
   selectItem(key){
     
-    console.log('key', key)
-
     this.firebaseMastItemSvc.getItemDetails(key).subscribe(item => {
-      console.log(item)
-
+    
       this.selItemKey = item.$key;
       this.selectedItem = item;
 
@@ -168,24 +189,23 @@ export class ClassItemsComponent implements OnInit {
       this.selItemRetail02Name = item.itemRetail02Name;
       this.selItemRetail03Name = item.itemRetail03Name;
     });
-    console.log('this.selItemName', this.selItemName);
+    
     
     let updateClassRm = {
       name : this.selItemName,
+      imageUrl : this.selItemImageUrl,
+      qty: this.selItemQty,
+      isChecked: "0",
+      itemType: "00 ",
+      sortKey: "00 " + this.selItemName,
+      notes01: this.selItemNotes
+
     }
 
     this.firebaseClassRoomSvc.addClassRoomItem(this.selectedKey, this.selClassRmKey, updateClassRm);
-    // this.firebaseMastItemSvc.getItems().subscribe(items => {
-    //   console.log(items);
-    //   this.itemList = items;
-    //   console.log('this.itemList', this.itemList);
-    // });
   }
 
   selectClass(schoolKey,  key){
-    console.log('key: ', key)
-    console.log('schoolKey: ',schoolKey)
-
     this.firebaseClassRoomSvc.getClassRmDetails(schoolKey, key).subscribe(classRm => {
       this.selClassRm = classRm;
 
@@ -199,20 +219,20 @@ export class ClassItemsComponent implements OnInit {
      this.firebaseClassRoomSvc.getClassRoomItems(this.selectedKey, this.selClassRmKey).subscribe(classItems => {
        this.classRmItemList = classItems
      });
-      console.log("this.selClassRm: ", this.selClassRm);
     });
   }
 
+  delItem(key){
+    console.log('key: ', key)
+    this.firebaseClassRoomSvc.delClassItem(key)
+  }
   
 
   selectSchool(key){
-    console.log('key: ', key)
     
     this.isSelected = !this.isSelected;
-    // console.log('this.isSelected;: ', this.isSelected);
 
     this.firebaseClassRoomSvc.getClassRooms(key).subscribe(classRms => {
-      // console.log("XXX classRm: ", classRms);
       this.classRmList = classRms
     });
 
@@ -225,10 +245,7 @@ export class ClassItemsComponent implements OnInit {
       this.selSchoolImage = school.image
       this.selSchoolWeb  = school.webSite
       this.selSchoolPhone = school.phone
-      console.log("class Rooms: ", this.selectedSchool.classrooms)
     });
-
-    console.log('resetSelClassRm();');
     this.resetSelClassRm();
   }
 

@@ -16,6 +16,11 @@ export class FirebaseClassRoomService {
     
   }
 
+  delClassItem(key){
+    return this.classRoomItemList.remove(key);
+  }
+
+
   delClassRoom(key){
     return this.classRoomList.remove(key);
   }
@@ -25,18 +30,38 @@ export class FirebaseClassRoomService {
     let fbClassRoomPath: String =  fbSchoolPath + environment.FB_NODE_CLASSROOM.name + "/" + classKey + "/"
     let fbClassRoomItemsPath: string = fbClassRoomPath + environment.FB_NODE_CLASSROOM.FB_ITEM_CLASSRM.ITEM_ClassItemList
 
-    this.classRoomItemList = this.db.list(fbClassRoomItemsPath) as FirebaseListObservable<ClassItem[]>;
+    this.classRoomItemList = this.db.list(fbClassRoomItemsPath, {
+      query: {
+        orderByChild: environment.FB_NODE_CLASSROOM.FB_ITEM_CLASSRM.ITEM_SortKey
+      }
+    }) as FirebaseListObservable<ClassItem[]>;
     return this.classRoomItemList
   }
 
 
   addClassRoomItem(schoolKey, classKey, newItem){
+    console.log("newItem", newItem);
+
     let fbSchoolPath:String = environment.FB_NODE_SCHOOL.name + "/" + schoolKey + "/"
     let fbClassRoomPath: String =  fbSchoolPath + environment.FB_NODE_CLASSROOM.name + "/" + classKey + "/"
     let fbClassRoomItemsPath: string = fbClassRoomPath + environment.FB_NODE_CLASSROOM.FB_ITEM_CLASSRM.ITEM_ClassItemList
 
-    let classRoomItemList = this.db.list(fbClassRoomItemsPath) as FirebaseListObservable<ClassItem>;
+    let classRoomItemList = this.db.list(fbClassRoomItemsPath, {
+      query: {
+        orderByChild: environment.FB_NODE_CLASSROOM.FB_ITEM_CLASSRM.ITEM_SortKey
+      }
+    }) as FirebaseListObservable<ClassItem>;
     return  classRoomItemList.push(newItem);
+  }
+
+  setQty(key, classRmItemQty){
+    console.log('classRmItemQty:  ', classRmItemQty)
+    return this.classRoomItemList.update(key, classRmItemQty);
+  }
+
+  setClassRoomType(key, classRmType){
+    console.log('classRmType:  ', classRmType)
+    return this.classRoomItemList.update(key, classRmType);
   }
 
   updateClassRoom(key, classRm){

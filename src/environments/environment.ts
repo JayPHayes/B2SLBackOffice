@@ -46,7 +46,7 @@ export const environment = {
       ITEM_QTY: "qty",
       ITEM_Image: "itemImageurl",
       ITEM_Notes: "notes",
-      ITEM_Type: "type",
+      ITEM_Type: "itemType",
       ITEM_Retail01_Site: "retail_01_site",
       ITEM_Retail01_Name: "retail_01_name",
       ITEM_Retail02_Site: "retail_02_site",
