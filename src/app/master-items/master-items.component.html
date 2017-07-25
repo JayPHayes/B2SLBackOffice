@@ -249,7 +249,16 @@
 
           <br>
           <button type="submit" class="btn btn-outline-success btn-block btn-lg">Save</button>
-          <footer>Select Master Item Key:  <cite title="Source Title">{{selectedItem?.$key}}</cite></footer>
+          <br>
+          
+          <footer>
+            Select Master Item Key:  <cite title="Source Title">{{selectedItem?.$key}}</cite>
+            
+            <button (click)="cloneReset()" type="button" class="btn btn-outline-warning btn-sm">
+              Clone
+              <i class="fa fa-gears"></i>
+            </button>
+          </footer>
         </blockquote>
 
         </form>

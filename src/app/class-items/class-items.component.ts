@@ -8,6 +8,7 @@ import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/databa
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { Router } from '@angular/router'
 import { FilterPipe } from './../pipes/filter.pipe';
+import { SearchPipe } from './../pipes/search.pipe';
 
 @Component({
   selector: 'app-class-items',
@@ -20,6 +21,7 @@ export class ClassItemsComponent implements OnInit {
   itemList: any;
   classRmItemList: any;
   updatedQty: string = "";
+  
 
   selClassRoomItemKey: any;
 

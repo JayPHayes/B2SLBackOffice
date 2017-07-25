@@ -24,6 +24,7 @@ import { LoginComponent } from './login/login.component';
 import { InvalidPageComponent } from './invalid-page/invalid-page.component';
 import { PipesfilterPipe } from './pipesfilter.pipe';
 import { FilterPipe } from './pipes/filter.pipe';
+import { SearchPipe } from './search.pipe';
 
 const appRoutes: Routes = [
   {path: '', component:HomeComponent},
@@ -49,7 +50,8 @@ const appRoutes: Routes = [
     LoginComponent,
     InvalidPageComponent,
     PipesfilterPipe,
-    FilterPipe
+    FilterPipe,
+    SearchPipe
   ],
   imports: [
     BrowserModule,

@@ -13,7 +13,13 @@ export class FilterPipe implements PipeTransform {
 
     //return updates people array
     return items.filter(function(thisitem){
+
+      if(thisitem.itemName){
         return thisitem.itemName.toLowerCase().includes(search.toLowerCase());
+      } else {
+        return thisitem.name.toLowerCase().includes(search.toLowerCase());
+      }
+      
     }) 
 
   }

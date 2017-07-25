@@ -158,7 +158,7 @@
           <div class="row">
             <div class="col-12-sm">
               <input type="text" [(ngModel)]="search" name="search" id="search" class="form-control" placeholder="Item Search">
-              <table class="table table-sm table-bordered table-hover">
+              <table class="table table-responsive table-bordered table-hover">
                   <thead>
                     <tr>
                       <th>Qty</th>
@@ -219,11 +219,11 @@
             <h2 class="card-title">{{selClassRmName}}</h2>
             <div class="row">
               <div class="col-sm-5">
-                <h6 class="text-muted">  Notes</h6>
+                <p class="card-text text-muted">{{selClassRmNotes}}</p>    
               </div>
               <div class="col-sm-5">
                 <input [(ngModel)]="updatedQty" type="text" class="form-control">
-                <p class="card-text text-muted">{{selClassRmNotes}}</p>    
+                
               </div>
               <div class="col-sm-2">
                 <button (click)="setQty(selClassRoomItemKey )" class="btn btn-outline-primary">Go</button>
@@ -232,7 +232,7 @@
             
             <table class="table table-bordered table-sm table-hover">
                                                       
-                <tr *ngFor="let i of classRmItemList " [class.table-active]="i.$key ==  selClassRoomItemKey">
+                <tr *ngFor="let i of classRmItemList | filter:search " [class.table-active]="i.$key ==  selClassRoomItemKey">
                    <td>
                     <button (click)="selectClassRoomItemkey(i.$key)"  class="btn btn-outline-primary btn-sm"  >
                       <i class="fa fa-arrow-right"></i> 

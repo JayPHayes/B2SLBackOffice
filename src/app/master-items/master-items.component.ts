@@ -50,6 +50,9 @@ export class MasterItemsComponent implements OnInit {
     });
   }
 
+  cloneReset(){
+    this.selItemKey = null;
+  }
 
   delItem(key){
     this.firebasesvc.delItem(key);
